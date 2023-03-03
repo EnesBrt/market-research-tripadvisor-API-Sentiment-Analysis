@@ -46,5 +46,3 @@ http://127.0.0.1:8000/restaurant/{cityid}/{restaurantid}/dashboard
 
 This API is a work in progress and intends to ad a Sentiment Analysis part to examine a list of comments you may want to read from a .txt file
 or directly from Trip Advisor
-
-the scraping part is based on a github repo made by LaskasP
