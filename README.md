@@ -1,48 +1,71 @@
 # API_Tripadvisor
 
-This Api scraps and returns returns useful informations such as : the reviews (in french) and the global score of a restaurant from TripAdvisor
+Cette API extrait et renvoie des informations utiles telles que : les avis (en français) et le score global d'un restaurant à partir de TripAdvisor.
 
-it scraps using the following instructions :
-  
-  if oyu solely want to extract all restaurants and bare informations from a surrounding area use
-  http://127.0.0.1:8000/restaurant/{cityid} 
-    
-    which you can find from trip advisor
-    by default, this scraps only the top 30 restaurants from your surrounding area
-  
-  following your instruction you can add query such as :
-  http://127.0.0.1:8000/restaurant/{cityid}?review=True
-  
-  or
-  
-  http://127.0.0.1:8000/restaurant/{cityid}?full=True
-    
-    which returns whether all reviews from the surrounding area or all restaurants from the area.
-    you can combine those query in something like this :
-  
-  http://127.0.0.1:8000/restaurant/{cityid}?review=True&full=True
-  
-    this returns all review from all restaurants from the area
-    This does take a few hours depending on the numbers of restaurants you intend to extract informations from
+Elle extrait les données en utilisant les instructions suivantes :
 
-you can also scrap useful informations from a unique restaurant using :
+Si vous voulez uniquement extraire tous les restaurants et les informations de base d'une zone environnante, utilisez
+http://127.0.0.1:8000/restaurant/{cityid}
 
-  http://127.0.0.1:8000/restaurant/{cityid}/{restaurantid}
-  
-  this returns the informations from the first webpage displayed on TripAdvisor for the restaurant
-  this also takes the queries to extract all reviews
-  
-this Api can also display a useful dashboard using the instruction :
+Vous pouvez trouver le cityid sur TripAdvisor.
+Par défaut, cela extrait uniquement les 30 meilleurs restaurants de votre zone environnante.
+
+Selon vos instructions, vous pouvez ajouter une requête telle que :
+http://127.0.0.1:8000/restaurant/{cityid}?review=True
+
+ou
+
+http://127.0.0.1:8000/restaurant/{cityid}?full=True
+
+qui renvoie soit tous les avis de la zone environnante, soit tous les restaurants de la zone.
+Vous pouvez combiner ces requêtes en quelque chose comme ceci :
+
+http://127.0.0.1:8000/restaurant/{cityid}?review=True&full=True
+
+Cela renvoie tous les avis de tous les restaurants de la zone.
+Cela prend quelques heures en fonction du nombre de restaurants dont vous souhaitez extraire les informations.
+
+Vous pouvez également extraire des informations utiles d'un restaurant unique en utilisant :
+
+http://127.0.0.1:8000/restaurant/{cityid}/{restaurantid}
+
+Cela renvoie les informations de la première page web affichée sur TripAdvisor pour le restaurant.
+Cela prend également les requêtes pour extraire tous les avis.
+
+Cette API peut également afficher un tableau de bord utile en utilisant l'instruction :
 
 http://127.0.0.1:8000/restaurant/{cityid}/{restaurantid}/dashboard
-  
-  this then returns :
-    restaurant infos
-    list of most used words in the reviews
-    a top 10 comments
-    a worst 10 comments
-    
-  (as of yet, it is still a bit laggy, but i will try to focus on it)
 
-This API is a work in progress and intends to ad a Sentiment Analysis part to examine a list of comments you may want to read from a .txt file
-or directly from Trip Advisor
+Cela renvoie alors :
+- Informations sur le restaurant
+- Liste des mots les plus utilisés dans les avis
+- Un top 10 des commentaires
+- Un pire 10 des commentaires
+
+## Structure du projet
+
+Le projet contient les fichiers suivants :
+
+- `FranceCitiesGeoTag.xlsx` : Un fichier Excel contenant des informations géographiques sur les villes de France.
+- `IntegratedSA.py` : Un script Python pour l'analyse de sentiment intégrée.
+- `IntegratedScraper.py` : Un script Python pour le scraper intégré qui extrait les données de TripAdvisor.
+- `README.md` : Le fichier README du projet.
+- `chromedriver` : Le pilote Chrome utilisé par Selenium pour automatiser la navigation sur les pages web.
+- `lstm_model.h5` : Un modèle LSTM pré-entraîné pour l'analyse de sentiment.
+- `mainapi.py` : Le fichier principal de l'API.
+- `requierments.txt` : Un fichier contenant les dépendances Python nécessaires pour exécuter le projet.
+- `resto_semtiment.ipynb` : Un notebook Jupyter pour l'analyse de sentiment des avis de restaurants.
+
+Pour utiliser ce projet, vous devez d'abord cloner le dépôt sur votre machine locale. Ensuite, naviguez jusqu'au répertoire du projet et installez les dépendances nécessaires en utilisant pip :
+
+```bash
+pip install -r requierments.txt
+```
+
+Ensuite, vous pouvez démarrer l'API en utilisant la commande suivante :
+
+```bash
+python mainapi.py
+```
+
+Cela démarrera l'API sur votre machine locale. Vous pouvez alors accéder à l'API en ouvrant votre navigateur web et en naviguant jusqu'à `http://localhost:8000`.
